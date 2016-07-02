@@ -1,15 +1,15 @@
-include "keymap_common.h"
+#include "keymap_common.h"
 
-#define TAPPING_TOGGLE 2
+#define TAPPING_TOGGLE 2  // doesn't work, need to modify the variable in action_tapping.h instead
 #define TAPPING_TERM 200
 #define ONESHOP_TIMEOUT 500
 
 #define DEFAULT_LAYER 0
-#define FUN_LAYER 1
-#define MACRO_LAYER 2
-#define MOUSE_LAYER 3
-#define NUM_LAYER 4
-#define EMPTY_LAYER 4
+#define FUN_LAYER 4
+#define MACRO_LAYER 5
+#define MOUSE_LAYER 2
+#define NUM_LAYER 1
+#define WHEEL_LAYER 3
 
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* 0: qwerty */
@@ -33,67 +33,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         FN12,NO,  Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,NO  ,FN13, \
         FN0, LGUI,LALT,             SPC,                 RALT, RGUI,RCTL,FN1 ),
 
-    /* Keymap 1: Fn Layer
-     * ,-----------------------------------------------------------.
-     * |  `| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Delete |
-     * |-----------------------------------------------------------|
-     * |     |FN1|FN2|FN3|FN4|   |   |Vou|Ins|   |Psc|Slk|Pau|     |
-     * |-----------------------------------------------------------|
-     * |Caps  |WFv|MPL|VoD|MFd|Cal|Lef|Dow|Up |Rig|PgD|PgD|        |
-     * |-----------------------------------------------------------|
-     * |        |   |   |   |MPv|MRw|MNx|Mut|Hom|End|   |          |
-     * |-----------------------------------------------------------|
-     * |    |    |    |          FN5           |    |    |    |    |
-     * `-----------------------------------------------------------'
-     */
-    KEYMAP(
-        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL,  \
-        TRNS,FN1 ,FN2 ,FN3 ,TRNS,TRNS,TRNS,VOLU,INS, TRNS,PSCR,SLCK,PAUS,TRNS, \
-        CAPS,WFAV,MPLY,VOLD,MFFD,CALC,LEFT,DOWN,UP  ,RGHT,PGDN,PGUP,NO  ,TRNS, \
-        TRNS,NO  ,TRNS,TRNS,TRNS,MPRV,MRWD,MNXT,MUTE,HOME,END ,TRNS,NO  ,TRNS, \
-        TRNS,TRNS,TRNS,          FN5 ,                    TRNS,TRNS,TRNS,TRNS),
-
-    /* Keymap 2: Macro Layer
-     * ,-----------------------------------------------------------.
-     * |FN5|   |   |   |   |   |   |   |   |   |   |   |   |       |
-     * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |   |   |   |   |FN9|   |   |     |
-     * |-----------------------------------------------------------|
-     * |      |FN8|   |   |F10|FN6|   |   |   |FN8|   |   |        |
-     * |-----------------------------------------------------------|
-     * |        |SLP|PWR|   |   |   |FN7|   |   |   |   |          |
-     * |-----------------------------------------------------------|
-     * |    |    |    |                        |    |    |    |FN5 |
-     * `-----------------------------------------------------------'
-     */
-    KEYMAP(
-        FN5 ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN9 ,TRNS,TRNS,TRNS, \
-        TRNS,FN8 ,TRNS,TRNS,FN10,FN6 ,TRNS,TRNS,TRNS,FN8 ,TRNS,TRNS,NO  ,TRNS, \
-        TRNS,NO  ,SLEP,PWR ,TRNS,TRNS,TRNS,FN7 ,TRNS,TRNS,TRNS,TRNS,NO  ,TRNS, \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,FN5 ),
-
-     /* Keymap 3: Arrow Layer
-     * ,-----------------------------------------------------------.
-     * |FN5|   |   |   |   |   |   |   |   |   |   |   |   |       |
-     * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |WLf|WDn|WUp|WRg|   |   |   |     |
-     * |-----------------------------------------------------------|
-     * |      |   |Ac0|Ac1|Ac2|   |Lef|Dow|Up |Rig|   |   | Btn1   |
-     * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |Bn2|Bn3|   |   |   |      |   |
-     * |-----------------------------------------------------------|
-     * |    |    |    |          Btn1          |    |    |    |    |
-     * `-----------------------------------------------------------'
-     */
-    KEYMAP(
-        FN5 ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,WH_L,WH_D,WH_U,WH_R,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,ACL0,ACL1,ACL2,TRNS,MS_L,MS_D,MS_U,MS_R,TRNS,TRNS,NO  ,BTN1, \
-        TRNS,NO  ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,BTN2,BTN3,BTN4,BTN5,NO  ,TRNS, \
-        TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
-
-    /* Keymap 4: Num Layer
+    /* Keymap : Num Layer
      * ,-----------------------------------------------------------.
      * |FN5|   |   |   |   |   |   |   |   |   |   |   |   |       |
      * |-----------------------------------------------------------|
@@ -113,25 +53,86 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,NO  ,TRNS,TRNS,TRNS,TRNS,TRNS,KP_0,KP_1,KP_2,KP_3,TRNS,NO  ,TRNS, \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
 
-    /* Keymap 5: Empty Layer
+     /* Keymap : Mouse Layer
+     * ,-----------------------------------------------------------.
+     * |FN5|   |   |   |   |   |   |   |   |   |   |   |   |       |
+     * |-----------------------------------------------------------|
+     * |     |   |   |   |   |   |F15|   |   |   |F16|   |   |     |
+     * |-----------------------------------------------------------|
+     * |     |FN14|Ac0|Ac1|Ac2|   |Lef|Dow|Up |Rig|   |   | FN4    |
+     * |-----------------------------------------------------------|
+     * |        |   |   |   |   |   |Bn3|Bn2|Bn4|Bn5|   |      |   |
+     * |-----------------------------------------------------------|
+     * |    |    |    |          Btn1          |    |    |    |    |
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP(
+        FN5 ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN15,TRNS,TRNS,TRNS,FN16,TRNS,TRNS,TRNS, \
+        TRNS,FN14,ACL0,ACL1,ACL2,TRNS,MS_L,MS_D,MS_U,MS_R,TRNS,TRNS,NO  ,FN4 , \
+        TRNS,NO  ,TRNS,TRNS,TRNS,TRNS,TRNS,BTN3,BTN2,BTN4,BTN5,TRNS,NO  ,TRNS, \
+        TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
+
+     /* Keymap : Wheel Layer
      * ,-----------------------------------------------------------.
      * |FN5|   |   |   |   |   |   |   |   |   |   |   |   |       |
      * |-----------------------------------------------------------|
      * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
-     * |      |   |   |   |   |   |   |   |   |   |   |   |        |
+     * |      |   |   |   |   |   |WLf|WDn|WUp|WRg|   |   |        |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |          |
+     * |        |   |   |   |   |   |   |   |   |   |   |      |   |
      * |-----------------------------------------------------------|
      * |    |    |    |                        |    |    |    |    |
      * `-----------------------------------------------------------'
      */
     KEYMAP(
-        FN5 ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        FN5,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,NO  ,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,WH_L,WH_D,WH_U,WH_R,TRNS,TRNS,NO  ,TRNS, \
         TRNS,NO  ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,NO  ,TRNS, \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS ),
+        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+
+    /* Keymap : Fn Layer
+     * ,-----------------------------------------------------------.
+     * |  `| F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Delete |
+     * |-----------------------------------------------------------|
+     * |     |FN1|FN2|FN3|F18|   |   |Vou|Ins|   |Psc|Slk|Pau|     |
+     * |-----------------------------------------------------------|
+     * |Caps  |STP|MPL|VoD|MFd|Cal|Lef|Dow|Up |Rig|PgD|PgD|        |
+     * |-----------------------------------------------------------|
+     * |        |SER|HOM|   |MPv|MRw|MNx|Mut|Hom|End|   |          |
+     * |-----------------------------------------------------------|
+     * |    |    |    |          FN5           |    |    |    |    |
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP(
+        GRV ,F1  ,F2  ,F3  ,F4  ,F5  ,F6  ,F7  ,F8  ,F9  ,F10 ,F11 ,F12 ,DEL ,  \
+        TRNS,FN1 ,FN2 ,FN3 ,FN18,TRNS,TRNS,VOLU,INS, TRNS,PSCR,SLCK,PAUS,TRNS, \
+        CAPS,WSTP,MPLY,VOLD,MFFD,CALC,LEFT,DOWN,UP  ,RGHT,PGDN,PGUP,NO  ,TRNS, \
+        TRNS,NO  ,WSCH,WHOM,TRNS,MPRV,MRWD,MNXT,MUTE,HOME,END ,TRNS,NO  ,TRNS, \
+        TRNS,TRNS,TRNS,          FN5 ,                    TRNS,TRNS,TRNS,TRNS),
+
+    /* Keymap : Macro Layer
+     * ,-----------------------------------------------------------.
+     * |FN5|   |   |   |   |   |   |   |   |   |   |   |   | FN17  |
+     * |-----------------------------------------------------------|
+     * |     |   |   |   |   |   |   |   |   |   |FN9|   |   |     |
+     * |-----------------------------------------------------------|
+     * |      |FN8|   |   |F10|FN6|   |   |   |FN8|   |   |        |
+     * |-----------------------------------------------------------|
+     * |        |SLP|PWR|   |   |   |FN7|   |   |   |   |          |
+     * |-----------------------------------------------------------|
+     * |    |    |    |                        |    |    |    |FN5 |
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP(
+        FN5 ,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN17, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN9 ,TRNS,TRNS,TRNS, \
+        TRNS,FN8 ,TRNS,TRNS,FN10,FN6 ,TRNS,TRNS,TRNS,FN8 ,TRNS,TRNS,NO  ,TRNS, \
+        TRNS,NO  ,SLEP,PWR ,TRNS,TRNS,TRNS,FN7 ,TRNS,TRNS,TRNS,TRNS,NO  ,TRNS, \
+        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,FN5 ),
+
 };
 /*
  * Macro definition
@@ -142,6 +143,8 @@ enum macro_id {
     ACCOUNT,
     PASSWD,
     FGHT,
+    CLICK,
+    C_A_DEL,
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -167,6 +170,17 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case FGHT:
             return (record->event.pressed ?
                     MACRO( T(F),T(O),T(G),T(L),T(I),T(G),T(H),T(T), END ) :
+                    layer_off(MACRO_LAYER));
+        case CLICK:
+          if (record->event.pressed) {
+            mousekey_on(KC_BTN1);
+            mousekey_send();
+          }else
+            layer_off(MOUSE_LAYER);
+          return MACRO_NONE;
+        case C_A_DEL:
+            return (record->event.pressed ?
+                    MACRO( D(LCTL),D(LALT),D(DEL),W(200), END ) :
                     layer_off(MACRO_LAYER));
     }
     return MACRO_NONE;
@@ -203,9 +217,9 @@ const uint16_t PROGMEM fn_actions[] = {
     /* Poker Layout */
     [0] = ACTION_LAYER_TAP_TOGGLE(FUN_LAYER),   // toggle Fn overlay
     [1] = ACTION_LAYER_TOGGLE(MACRO_LAYER),     // toggle macros overlay
-    [2] = ACTION_LAYER_TOGGLE(MOUSE_LAYER),     // toggle mouse overlay
-    [3] = ACTION_LAYER_TOGGLE(NUM_LAYER),       // toggle number overlay
-    [4] = ACTION_LAYER_TOGGLE(EMPTY_LAYER),     // toggle empty overlay
+    [2] = ACTION_LAYER_TOGGLE(NUM_LAYER),       // toggle number overlay
+    [3] = ACTION_LAYER_TOGGLE(MOUSE_LAYER),     // toggle mouse overlay
+    [4] = ACTION_MACRO(CLICK),                  // execute left click and exit mouse layer
     [5] = ACTION_LAYER_CLEAR(ON_RELEASE),       // clear all overlay (ON_PRESS doesn't work)
     [6] = ACTION_MACRO(EMAIL_G),                // MACRO gemail
     [7] = ACTION_MACRO(EMAIL_N),                // MACRO 126email
@@ -215,6 +229,11 @@ const uint16_t PROGMEM fn_actions[] = {
     [11] = ACTION_FUNCTION(TRICKY_ESC),         // MACRO foglight
     [12] = ACTION_MODS_ONESHOT(MOD_LSFT),       // oneshot shift
     [13] = ACTION_MODS_ONESHOT(MOD_RSFT),
+    [14] = ACTION_LAYER_MOMENTARY(WHEEL_LAYER), // temparary toggle wheel layer
+    [15] = ACTION_MODS_KEY(MOD_LCTL, KC_C),     // shortcut for copy
+    [16] = ACTION_MODS_KEY(MOD_LCTL, KC_V),     // shortcut for patse
+    [17] = ACTION_MACRO(C_A_DEL),               // MACRO CTRL_ALT_DEL
+    [18] = ACTION_LAYER_TOGGLE(WHEEL_LAYER),    // toggle mouse overlay
 };
 
 
