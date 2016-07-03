@@ -5,6 +5,9 @@ This is a keyboard firmware with some useful features for Atmel AVR controller.
 Source code is available here: <http://github.com/tmk/tmk_keyboard>
 
 
+Satan --- https://gist.github.com/leodream/ed53e7c9182d9b9e9d48386086802a20
+
+
 Updates
 -------
 #### 2015/04/22
